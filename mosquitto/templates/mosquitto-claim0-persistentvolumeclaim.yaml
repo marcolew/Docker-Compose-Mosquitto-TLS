@@ -1,14 +1,21 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: ConfigMap
 metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: mosquitto-claim0
   name: mosquitto-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
+data:
+  mosquitto.conf: |-
+    # Ip/hostname to listen to.
+    # If not given, will listen on all interfaces
+    #bind_address
+
+    # Port to use for the default listener.
+    port 1883
+
+    # Allow anonymous users to connect?
+    # If not, the password file should be created
+    allow_anonymous true
+
+    # The password file.
+    # Use the `mosquitto_passwd` utility.
+    # If TLS is not compiled, plaintext "username:password" lines bay be used
+    # password_file /mosquitto/config/passwd

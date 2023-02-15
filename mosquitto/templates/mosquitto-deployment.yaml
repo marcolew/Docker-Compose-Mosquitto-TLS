@@ -34,9 +34,10 @@ spec:
           volumeMounts:
             - mountPath: /mosquitto/config/
               name: mosquitto-claim0
+              subPath: mosquitto.conf
       restartPolicy: Always
       volumes:
         - name: mosquitto-claim0
-          persistentVolumeClaim:
-            claimName: mosquitto-claim0
+          configMap:
+            name: mosquitto-claim0
 status: {}
